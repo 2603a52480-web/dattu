@@ -1,0 +1,50 @@
+:root {
+  --bg-primary: #07090e;
+  --bg-secondary: #0b1120;
+  --bg-card: rgba(13, 20, 36, 0.82);
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --neon-cyan: #00f0ff;
+  --neon-purple: #a855f7;
+  --neon-emerald: #10b981;
+  --border-cyber: rgba(0, 240, 255, 0.18);
+  --border-cyber-active: rgba(0, 240, 255, 0.65);
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-mono: 'Fira Code', monospace;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-display);
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+.cyber-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(14px);
+  border: 1px solid var(--border-cyber);
+  transition: all 0.3s ease;
+}
+
+.cyber-card:hover {
+  border-color: var(--border-cyber-active);
+  box-shadow: 0 0 25px rgba(0, 240, 255, 0.14);
+  transform: translateY(-2px);
+}
+
+.cyber-btn-primary {
+  background: linear-gradient(135deg, rgba(0, 240, 255, 0.15), rgba(168, 85, 247, 0.15));
+  border: 1px solid var(--neon-cyan);
+  color: var(--neon-cyan);
+  font-family: var(--font-mono);
+  font-weight: 600;
+  transition: all 0.25s ease;
+}
+
+.cyber-btn-primary:hover {
+  background: var(--neon-cyan);
+  color: #07090e;
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.35);
+}
