@@ -1,8 +1,3 @@
-/**
- * Futuristic Particle & Matrix Canvas Engine
- * Handles interactive cyber constellation and matrix digital rain modes.
- */
-
 class CyberCanvas {
   constructor(canvasId) {
     this.canvas = document.getElementById(canvasId);
@@ -10,7 +5,7 @@ class CyberCanvas {
     this.ctx = this.canvas.getContext('2d');
     this.particles = [];
     this.mouse = { x: null, y: null, radius: 140 };
-    this.mode = 'constellation'; // 'constellation' or 'matrix'
+    this.mode = 'constellation';
     this.matrixColumns = [];
     this.matrixChars = '0123456789ABCDEF0123456789GKD<>{}[]/\\*+-=~^$#@!%&';
     this.fontSize = 14;
@@ -22,17 +17,14 @@ class CyberCanvas {
   init() {
     this.resize();
     window.addEventListener('resize', () => this.resize());
-    
     window.addEventListener('mousemove', (e) => {
       this.mouse.x = e.clientX;
       this.mouse.y = e.clientY;
     });
-
     window.addEventListener('mouseleave', () => {
       this.mouse.x = null;
       this.mouse.y = null;
     });
-
     this.initConstellation();
     this.animate();
   }
@@ -84,7 +76,6 @@ class CyberCanvas {
 
   animate() {
     this.animId = requestAnimationFrame(() => this.animate());
-
     if (this.mode === 'matrix') {
       this.renderMatrix();
     } else {
@@ -94,7 +85,6 @@ class CyberCanvas {
 
   renderConstellation() {
     this.ctx.clearRect(0, 0, this.width, this.height);
-
     for (let i = 0; i < this.particles.length; i++) {
       const p = this.particles[i];
       p.x += p.vx;
@@ -126,7 +116,6 @@ class CyberCanvas {
         const dx = p.x - p2.x;
         const dy = p.y - p2.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
-
         if (dist < 110) {
           const alpha = (1 - dist / 110) * 0.25;
           this.ctx.beginPath();
@@ -134,7 +123,6 @@ class CyberCanvas {
           this.ctx.lineTo(p2.x, p2.y);
           this.ctx.strokeStyle = `rgba(0, 240, 255, ${alpha})`;
           this.ctx.lineWidth = 0.8;
-          this.ctx.shadowBlur = 0;
           this.ctx.stroke();
         }
       }
@@ -144,20 +132,15 @@ class CyberCanvas {
   renderMatrix() {
     this.ctx.fillStyle = 'rgba(7, 9, 14, 0.08)';
     this.ctx.fillRect(0, 0, this.width, this.height);
-
     this.ctx.fillStyle = '#00f0ff';
     this.ctx.font = `${this.fontSize}px 'Courier New', monospace`;
-    this.ctx.shadowBlur = 5;
-    this.ctx.shadowColor = '#00f0ff';
 
     for (let i = 0; i < this.matrixColumns.length; i++) {
       const char = this.matrixChars[Math.floor(Math.random() * this.matrixChars.length)];
       const x = i * this.fontSize;
       const y = this.matrixColumns[i] * this.fontSize;
 
-      if (y > 0) {
-        this.ctx.fillText(char, x, y);
-      }
+      if (y > 0) this.ctx.fillText(char, x, y);
 
       if (y > this.height && Math.random() > 0.985) {
         this.matrixColumns[i] = 0;
